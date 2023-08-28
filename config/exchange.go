@@ -1,7 +1,6 @@
 package config
 
-type BaseExchangeConfig struct {
+type ExchangeConfig struct {
 	MarketURL string
 	RialAbbr  string
-	Upper     bool
 }

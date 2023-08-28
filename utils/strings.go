@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"log"
+	"strconv"
 	"strings"
 )
 
@@ -18,4 +20,12 @@ func Hyphenize(base, quote string) string {
 
 func DeHyphenize(s string) string {
 	return strings.Replace(s, "-", "", -1)
+}
+
+func StringToInt(s string) int {
+	num, err := strconv.Atoi(s)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return num
 }
