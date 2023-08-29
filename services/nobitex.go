@@ -17,12 +17,8 @@ func NobitexUSDT(c *gin.Context) {
 		log.Println(err)
 	}
 
-	if err != nil {
-		log.Println(err)
-	}
-
-	asks := data["asks"].([]any)
 	bids := data["bids"].([]any)
+	asks := data["asks"].([]any)
 
 	buyPrice := bids[0].([]any)[0].(string)
 	sellPrice := asks[0].([]any)[0].(string)

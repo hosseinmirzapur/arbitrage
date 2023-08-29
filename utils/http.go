@@ -8,8 +8,8 @@ import (
 	"net/http"
 )
 
-func GetRequest(usdtPriceURL string) (map[string]interface{}, error) {
-	req, err := http.NewRequest(http.MethodGet, usdtPriceURL, nil)
+func GetRequest(url string) (map[string]interface{}, error) {
+	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		log.Fatalf("client: could not create request: %s\n", err)
 	}

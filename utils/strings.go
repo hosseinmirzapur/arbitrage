@@ -29,3 +29,12 @@ func StringToInt(s string) int {
 	}
 	return num
 }
+
+func FloatStringToInt(s string) float64 {
+	floatNum, err := strconv.ParseFloat(s, 64)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return floatNum
+}
