@@ -1,12 +1,12 @@
 package config
 
 type wallexConfig struct {
-	ExchangeConfig
+	exchangeConfig
 }
 
 func Wallex() *wallexConfig {
 	return &wallexConfig{
-		ExchangeConfig: ExchangeConfig{
+		exchangeConfig: exchangeConfig{
 			MarketURL: "https://api.wallex.ir/v1/markets",
 			RialAbbr:  "TMN",
 		},

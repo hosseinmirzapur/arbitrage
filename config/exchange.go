@@ -1,6 +1,6 @@
 package config
 
-type ExchangeConfig struct {
+type exchangeConfig struct {
 	MarketURL string
 	RialAbbr  string
 }

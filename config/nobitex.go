@@ -1,12 +1,12 @@
 package config
 
-type NobitexConfig struct {
-	ExchangeConfig
+type nobitexConfig struct {
+	exchangeConfig
 }
 
-func Nobitex() *NobitexConfig {
-	return &NobitexConfig{
-		ExchangeConfig: ExchangeConfig{
+func Nobitex() *nobitexConfig {
+	return &nobitexConfig{
+		exchangeConfig: exchangeConfig{
 			MarketURL: "https://api.nobitex.ir/v2/orderbook",
 			RialAbbr:  "IRT",
 		},

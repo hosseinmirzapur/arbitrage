@@ -30,8 +30,8 @@ func WallexUSDT(c *gin.Context) {
 
 			c.JSON(200, &gin.H{
 				"wallex": &gin.H{
-					"buy":  utils.FloatStringToInt(buyPrice),
-					"sell": utils.FloatStringToInt(sellPrice),
+					"buy":  utils.StringToFloat(buyPrice),
+					"sell": utils.StringToFloat(sellPrice),
 				},
 			})
 			return
