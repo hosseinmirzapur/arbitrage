@@ -1,20 +1,19 @@
-package handlers
+package data
 
 import (
-	"log"
+	"errors"
 
-	"github.com/gin-gonic/gin"
 	"github.com/hosseinmirzapur/arbitrage/config"
 	"github.com/hosseinmirzapur/arbitrage/utils"
 )
 
-func OkexUSDT(c *gin.Context) {
+func OkexPrice() (*Price, error) {
 	endpoint := config.Okex().MarketURL
 
 	data, err := utils.GetRequest(endpoint)
 
 	if err != nil {
-		log.Println(err)
+		return nil, err
 	}
 
 	ticker := data["tickers"].([]interface{})
@@ -24,17 +23,12 @@ func OkexUSDT(c *gin.Context) {
 			buyPrice := item["best_bid"].(string)
 			sellPrice := item["best_ask"].(string)
 
-			c.JSON(200, &gin.H{
-				"okex": &gin.H{
-					"buy":  utils.StringToFloat(buyPrice),
-					"sell": utils.StringToFloat(sellPrice),
-				},
-			})
-			return
+			return &Price{
+				Buy:  utils.StringToFloat(buyPrice),
+				Sell: utils.StringToFloat(sellPrice),
+			}, nil
 		}
 	}
-	c.JSON(404, &gin.H{
-		"message": "market not found",
-	})
 
+	return nil, errors.New("price not found")
 }

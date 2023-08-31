@@ -1,20 +1,19 @@
-package handlers
+package data
 
 import (
-	"log"
+	"errors"
 
-	"github.com/gin-gonic/gin"
 	"github.com/hosseinmirzapur/arbitrage/config"
 	"github.com/hosseinmirzapur/arbitrage/utils"
 )
 
-func WallexUSDT(c *gin.Context) {
+func WallexPrice() (*Price, error) {
 	dataURL := config.Wallex().MarketURL
 
 	data, err := utils.GetRequest(dataURL)
 
 	if err != nil {
-		log.Println(err.Error())
+		return nil, err
 	}
 
 	result := data["result"].(map[string]interface{})
@@ -28,17 +27,12 @@ func WallexUSDT(c *gin.Context) {
 			sellPrice := stats["askPrice"].(string)
 			buyPrice := stats["bidPrice"].(string)
 
-			c.JSON(200, &gin.H{
-				"wallex": &gin.H{
-					"buy":  utils.StringToFloat(buyPrice),
-					"sell": utils.StringToFloat(sellPrice),
-				},
-			})
-			return
+			return &Price{
+				Buy:  utils.StringToFloat(buyPrice),
+				Sell: utils.StringToFloat(sellPrice),
+			}, nil
 		}
 	}
 
-	c.JSON(404, &gin.H{
-		"message": "Not Found",
-	})
+	return nil, errors.New("price not found")
 }
