@@ -3,12 +3,20 @@ package main
 import (
 	"log"
 
+	"github.com/hosseinmirzapur/arbitrage/config"
 	"github.com/hosseinmirzapur/arbitrage/server"
 	"github.com/hosseinmirzapur/arbitrage/services"
 	"github.com/hosseinmirzapur/arbitrage/services/jobs"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+
+	serverConf := config.NewConf()
+	if serverConf.AppMode() == "dev" {
+		godotenv.Load()
+	}
+
 	// Redis Init
 	err := services.RedisInit()
 	if err != nil {

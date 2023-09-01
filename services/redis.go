@@ -2,6 +2,9 @@ package services
 
 import (
 	"context"
+	"errors"
+	"fmt"
+	"os"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -12,9 +15,22 @@ var ctx = context.Background()
 var client *redis.Client
 
 func RedisInit() error {
+	addr := os.Getenv("REDIS_ADDR")
+	if addr == "" {
+		return errors.New("REDIS_ADDR not set")
+	}
+
+	pass := os.Getenv("REDIS_PASS")
+	if pass == "" {
+		return errors.New("REDIS_PASS not set")
+	}
+	port := os.Getenv("REDIS_PORT")
+	if port == "" {
+		return errors.New("REDIS_PORT not set")
+	}
 	client = redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Password: "",
+		Addr:     fmt.Sprintf("%s:%s", addr, port),
+		Password: pass,
 		DB:       0,
 	})
 
