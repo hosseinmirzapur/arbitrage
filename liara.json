@@ -1,0 +1,5 @@
+{
+	"platform": "docker",
+	"app": "arbitrage",
+	"port": 3000
+}
