@@ -13,7 +13,7 @@ import (
 func main() {
 
 	serverConf := config.NewConf()
-	if serverConf.AppMode() == "dev" {
+	if serverConf.AppMode() == "prod" {
 		godotenv.Load()
 	}
 
