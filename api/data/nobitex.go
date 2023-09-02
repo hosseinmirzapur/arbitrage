@@ -4,12 +4,13 @@ import (
 	"fmt"
 
 	"github.com/hosseinmirzapur/arbitrage/config"
+	"github.com/hosseinmirzapur/arbitrage/services/client"
 	"github.com/hosseinmirzapur/arbitrage/utils"
 )
 
 func NobitexPrice() (*Price, error) {
 	usdtPriceURL := fmt.Sprintf("%s/%s%s", config.Nobitex().MarketURL, "USDT", config.Nobitex().RialAbbr)
-	data, err := utils.GetRequest(usdtPriceURL)
+	data, err := client.GetRequest(usdtPriceURL)
 
 	if err != nil {
 		return nil, err

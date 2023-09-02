@@ -9,8 +9,9 @@ RUN go mod init github.com/hosseinmirzapur/arbitrage && \
 
 FROM debian:latest
 
-RUN apt-get -y install bash
-
+RUN apt-get update && \ 
+    apt-get -y install bash
+    
 WORKDIR /app
 
 COPY --from=build /app/main .

@@ -4,13 +4,14 @@ import (
 	"errors"
 
 	"github.com/hosseinmirzapur/arbitrage/config"
+	"github.com/hosseinmirzapur/arbitrage/services/client"
 	"github.com/hosseinmirzapur/arbitrage/utils"
 )
 
 func WallexPrice() (*Price, error) {
 	dataURL := config.Wallex().MarketURL
 
-	data, err := utils.GetRequest(dataURL)
+	data, err := client.GetRequest(dataURL)
 
 	if err != nil {
 		return nil, err

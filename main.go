@@ -14,8 +14,10 @@ import (
 func main() {
 
 	serverConf := config.NewConf()
-	if serverConf.AppMode() == "prod" {
+	if serverConf.AppMode() == "dev" {
 		godotenv.Load()
+		gin.SetMode(gin.DebugMode)
+	} else {
 		gin.SetMode(gin.ReleaseMode)
 	}
 

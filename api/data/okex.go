@@ -4,13 +4,14 @@ import (
 	"errors"
 
 	"github.com/hosseinmirzapur/arbitrage/config"
+	"github.com/hosseinmirzapur/arbitrage/services/client"
 	"github.com/hosseinmirzapur/arbitrage/utils"
 )
 
 func OkexPrice() (*Price, error) {
 	endpoint := config.Okex().MarketURL
 
-	data, err := utils.GetRequest(endpoint)
+	data, err := client.GetRequest(endpoint)
 
 	if err != nil {
 		return nil, err

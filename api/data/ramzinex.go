@@ -2,13 +2,13 @@ package data
 
 import (
 	"github.com/hosseinmirzapur/arbitrage/config"
-	"github.com/hosseinmirzapur/arbitrage/utils"
+	"github.com/hosseinmirzapur/arbitrage/services/client"
 )
 
 func RamzinexPrice() (*Price, error) {
 	endpoint := config.Ramzinex().MarketURL
 
-	data, err := utils.GetRequest(endpoint)
+	data, err := client.GetRequest(endpoint)
 
 	if err != nil {
 		return nil, err

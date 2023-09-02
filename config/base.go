@@ -6,7 +6,7 @@ type baseConfig struct {
 
 func NewConf() *baseConfig {
 	return &baseConfig{
-		appMode: "dev", // "dev" or "prod"
+		appMode: "prod", // "dev" or "prod"
 	}
 }
 

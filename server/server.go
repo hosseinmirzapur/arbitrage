@@ -15,5 +15,5 @@ func Run() error {
 	r.GET("/abantether/usdt", handlers.AbanTetherUSDT)
 	r.GET("/ramzinex/usdt", handlers.RamzinexUSDT)
 	r.GET("/all/usdt", handlers.AllUSDT)
-	return r.Run(":3000")
+	return r.RunTLS(":3000", "server.crt", "server.key")
 }
