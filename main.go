@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/gin-gonic/gin"
 	"github.com/hosseinmirzapur/arbitrage/config"
 	"github.com/hosseinmirzapur/arbitrage/server"
 	"github.com/hosseinmirzapur/arbitrage/services"
@@ -15,6 +16,7 @@ func main() {
 	serverConf := config.NewConf()
 	if serverConf.AppMode() == "prod" {
 		godotenv.Load()
+		gin.SetMode(gin.ReleaseMode)
 	}
 
 	// Redis Init
