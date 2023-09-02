@@ -1,15 +1,15 @@
 package config
 
-type baseConfig struct {
+type BaseConfig struct {
 	appMode string
 }
 
-func NewConf() *baseConfig {
-	return &baseConfig{
-		appMode: "prod", // "dev" or "prod"
+func NewConf() *BaseConfig {
+	return &BaseConfig{
+		appMode: "dev", // "dev" or "prod"
 	}
 }
 
-func (c *baseConfig) AppMode() string {
+func (c *BaseConfig) AppMode() string {
 	return c.appMode
 }

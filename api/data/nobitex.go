@@ -1,26 +1,29 @@
 package data
 
 import (
-	"fmt"
-
 	"github.com/hosseinmirzapur/arbitrage/config"
 	"github.com/hosseinmirzapur/arbitrage/services/client"
 	"github.com/hosseinmirzapur/arbitrage/utils"
 )
 
 func NobitexPrice() (*Price, error) {
-	usdtPriceURL := fmt.Sprintf("%s/%s%s", config.Nobitex().MarketURL, "USDT", config.Nobitex().RialAbbr)
-	data, err := client.GetRequest(usdtPriceURL)
+	usdtPriceURL := config.Nobitex().MarketURL
+	body := []byte(`{
+		"srcCurrency": "usdt",
+		"dstCurrency": "rls"
+	}`)
+
+	data, err := client.PostRequest(usdtPriceURL, body)
 
 	if err != nil {
 		return nil, err
 	}
 
-	bids := data["bids"].([]any)
-	asks := data["asks"].([]any)
+	stats := data["stats"].(map[string]interface{})
+	usdtRls := stats["usdt-rls"].(map[string]interface{})
 
-	buyPrice := bids[0].([]any)[0].(string)
-	sellPrice := asks[0].([]any)[0].(string)
+	buyPrice := usdtRls["bestBuy"].(string)
+	sellPrice := usdtRls["bestSell"].(string)
 
 	return &Price{
 		Buy:  utils.StringToFloat(buyPrice) / 10,

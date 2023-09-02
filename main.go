@@ -19,8 +19,17 @@ func main() {
 		gin.SetMode(gin.DebugMode)
 	} else {
 		gin.SetMode(gin.ReleaseMode)
+		serverMethods()
 	}
 
+	// Start Server
+	err := server.Run(serverConf)
+	if err != nil {
+		log.Fatalf("cannot start the server...\n")
+	}
+}
+
+func serverMethods() {
 	// Redis Init
 	err := services.RedisInit()
 	if err != nil {
@@ -31,11 +40,5 @@ func main() {
 	err = jobs.RunCron()
 	if err != nil {
 		log.Fatalf("cannot run cron jobs...\n")
-	}
-
-	// Start Server
-	err = server.Run()
-	if err != nil {
-		log.Fatalf("cannot start the server...\n")
 	}
 }

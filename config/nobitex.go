@@ -7,8 +7,8 @@ type nobitexConfig struct {
 func Nobitex() *nobitexConfig {
 	return &nobitexConfig{
 		exchangeConfig: exchangeConfig{
-			MarketURL: "https://api.nobitex.ir/v2/orderbook",
-			RialAbbr:  "IRT",
+			MarketURL: "https://api.nobitex.ir/market/stats",
+			RialAbbr:  "rls",
 		},
 	}
 }
